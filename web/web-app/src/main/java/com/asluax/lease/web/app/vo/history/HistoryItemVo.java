@@ -1,9 +1,8 @@
 package com.asluax.lease.web.app.vo.history;
 
 
-import com.atguigu.lease.model.entity.BrowsingHistory;
-import com.atguigu.lease.model.enums.ReleaseStatus;
-import com.atguigu.lease.web.app.vo.graph.GraphVo;
+import com.asluax.lease.model.entity.BrowsingHistory;
+import com.asluax.lease.web.app.vo.graph.GraphVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

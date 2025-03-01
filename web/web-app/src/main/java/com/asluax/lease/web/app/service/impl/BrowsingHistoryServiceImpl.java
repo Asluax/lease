@@ -1,19 +1,11 @@
 package com.asluax.lease.web.app.service.impl;
 
-import com.atguigu.lease.model.entity.BrowsingHistory;
-import com.atguigu.lease.web.app.mapper.BrowsingHistoryMapper;
-import com.atguigu.lease.web.app.service.BrowsingHistoryService;
-import com.atguigu.lease.web.app.vo.history.HistoryItemVo;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.asluax.lease.model.entity.BrowsingHistory;
+import com.asluax.lease.web.app.mapper.BrowsingHistoryMapper;
+import com.asluax.lease.web.app.service.BrowsingHistoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  * @author liubo

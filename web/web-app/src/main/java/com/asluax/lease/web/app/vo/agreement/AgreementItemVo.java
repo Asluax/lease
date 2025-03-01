@@ -1,8 +1,8 @@
 package com.asluax.lease.web.app.vo.agreement;
 
-import com.atguigu.lease.model.enums.LeaseSourceType;
-import com.atguigu.lease.model.enums.LeaseStatus;
-import com.atguigu.lease.web.app.vo.graph.GraphVo;
+import com.asluax.lease.model.enums.LeaseSourceType;
+import com.asluax.lease.model.enums.LeaseStatus;
+import com.asluax.lease.web.app.vo.graph.GraphVo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

@@ -1,11 +1,11 @@
 package com.asluax.lease.web.app.controller.agreement;
 
 
-import com.atguigu.lease.common.result.Result;
-import com.atguigu.lease.model.entity.LeaseAgreement;
-import com.atguigu.lease.model.enums.LeaseStatus;
-import com.atguigu.lease.web.app.vo.agreement.AgreementDetailVo;
-import com.atguigu.lease.web.app.vo.agreement.AgreementItemVo;
+import com.asluax.lease.common.result.Result;
+import com.asluax.lease.model.entity.LeaseAgreement;
+import com.asluax.lease.model.enums.LeaseStatus;
+import com.asluax.lease.web.app.vo.agreement.AgreementDetailVo;
+import com.asluax.lease.web.app.vo.agreement.AgreementItemVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;

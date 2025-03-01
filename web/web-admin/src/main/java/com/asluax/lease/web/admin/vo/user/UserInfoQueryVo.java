@@ -1,6 +1,7 @@
 package com.asluax.lease.web.admin.vo.user;
 
-import com.atguigu.lease.model.enums.BaseStatus;
+
+import com.asluax.lease.model.enums.BaseStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

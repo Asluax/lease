@@ -1,7 +1,7 @@
 package com.asluax.lease.web.app.vo.appointment;
 
-import com.atguigu.lease.model.entity.ViewAppointment;
-import com.atguigu.lease.web.app.vo.apartment.ApartmentItemVo;
+import com.asluax.lease.model.entity.ViewAppointment;
+import com.asluax.lease.web.app.vo.apartment.ApartmentItemVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

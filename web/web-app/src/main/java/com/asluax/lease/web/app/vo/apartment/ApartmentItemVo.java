@@ -1,9 +1,9 @@
 package com.asluax.lease.web.app.vo.apartment;
 
 
-import com.atguigu.lease.model.entity.ApartmentInfo;
-import com.atguigu.lease.model.entity.GraphInfo;
-import com.atguigu.lease.model.entity.LabelInfo;
+import com.asluax.lease.model.entity.ApartmentInfo;
+import com.asluax.lease.model.entity.GraphInfo;
+import com.asluax.lease.model.entity.LabelInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

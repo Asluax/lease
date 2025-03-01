@@ -1,7 +1,7 @@
 package com.asluax.lease.web.app.vo.attr;
 
-import com.atguigu.lease.model.entity.AttrKey;
-import com.atguigu.lease.model.entity.AttrValue;
+import com.asluax.lease.model.entity.AttrKey;
+import com.asluax.lease.model.entity.AttrValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

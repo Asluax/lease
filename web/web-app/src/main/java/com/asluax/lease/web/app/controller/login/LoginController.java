@@ -1,15 +1,11 @@
 package com.asluax.lease.web.app.controller.login;
 
 
-
-import com.atguigu.lease.common.context.LoginUserContext;
-import com.atguigu.lease.common.result.Result;
-import com.atguigu.lease.web.app.service.LoginService;
-import com.atguigu.lease.web.app.vo.user.LoginVo;
-import com.atguigu.lease.web.app.vo.user.UserInfoVo;
+import com.asluax.lease.common.result.Result;
+import com.asluax.lease.web.app.vo.user.LoginVo;
+import com.asluax.lease.web.app.vo.user.UserInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

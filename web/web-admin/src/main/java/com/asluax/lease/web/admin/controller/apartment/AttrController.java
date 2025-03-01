@@ -1,10 +1,10 @@
 package com.asluax.lease.web.admin.controller.apartment;
 
 
-import com.atguigu.lease.common.result.Result;
-import com.atguigu.lease.model.entity.AttrKey;
-import com.atguigu.lease.model.entity.AttrValue;
-import com.atguigu.lease.web.admin.vo.attr.AttrKeyVo;
+import com.asluax.lease.common.result.Result;
+import com.asluax.lease.model.entity.AttrKey;
+import com.asluax.lease.model.entity.AttrValue;
+import com.asluax.lease.web.admin.vo.attr.AttrKeyVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;

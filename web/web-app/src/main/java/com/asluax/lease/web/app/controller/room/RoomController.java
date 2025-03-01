@@ -1,16 +1,13 @@
 package com.asluax.lease.web.app.controller.room;
 
 
-import com.atguigu.lease.common.result.Result;
-import com.atguigu.lease.web.app.service.RoomInfoService;
-import com.atguigu.lease.web.app.vo.room.RoomDetailVo;
-import com.atguigu.lease.web.app.vo.room.RoomItemVo;
-import com.atguigu.lease.web.app.vo.room.RoomQueryVo;
+import com.asluax.lease.common.result.Result;
+import com.asluax.lease.web.app.vo.room.RoomDetailVo;
+import com.asluax.lease.web.app.vo.room.RoomItemVo;
+import com.asluax.lease.web.app.vo.room.RoomQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

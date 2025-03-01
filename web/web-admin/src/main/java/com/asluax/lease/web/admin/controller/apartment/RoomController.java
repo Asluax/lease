@@ -1,13 +1,13 @@
 package com.asluax.lease.web.admin.controller.apartment;
 
 
-import com.atguigu.lease.common.result.Result;
-import com.atguigu.lease.model.entity.RoomInfo;
-import com.atguigu.lease.model.enums.ReleaseStatus;
-import com.atguigu.lease.web.admin.vo.room.RoomDetailVo;
-import com.atguigu.lease.web.admin.vo.room.RoomItemVo;
-import com.atguigu.lease.web.admin.vo.room.RoomQueryVo;
-import com.atguigu.lease.web.admin.vo.room.RoomSubmitVo;
+import com.asluax.lease.common.result.Result;
+import com.asluax.lease.model.entity.RoomInfo;
+import com.asluax.lease.model.enums.ReleaseStatus;
+import com.asluax.lease.web.admin.vo.room.RoomDetailVo;
+import com.asluax.lease.web.admin.vo.room.RoomItemVo;
+import com.asluax.lease.web.admin.vo.room.RoomQueryVo;
+import com.asluax.lease.web.admin.vo.room.RoomSubmitVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

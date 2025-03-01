@@ -57,6 +57,7 @@ public class Knife4jConfiguration {
                         "/admin/file/**"
                 ).build();
     }
+
     @Bean
     public GroupedOpenApi leaseAPI() {
         return GroupedOpenApi.builder().group("租赁信息管理").
@@ -65,6 +66,7 @@ public class Knife4jConfiguration {
                         "/admin/agreement/**"
                 ).build();
     }
+
     @Bean
     public GroupedOpenApi userAPI() {
         return GroupedOpenApi.builder().group("平台用户管理").

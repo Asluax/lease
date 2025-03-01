@@ -1,6 +1,6 @@
 package com.asluax.lease.web.app.service.impl;
 
-import com.atguigu.lease.web.app.service.SmsService;
+import com.asluax.lease.web.app.service.SmsService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,8 +1,8 @@
 package com.asluax.lease.web.app.service.impl;
 
-import com.atguigu.lease.model.entity.ViewAppointment;
-import com.atguigu.lease.web.app.mapper.ViewAppointmentMapper;
-import com.atguigu.lease.web.app.service.ViewAppointmentService;
+import com.asluax.lease.model.entity.ViewAppointment;
+import com.asluax.lease.web.app.mapper.ViewAppointmentMapper;
+import com.asluax.lease.web.app.service.ViewAppointmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package com.asluax.lease.web.admin.controller.apartment;
 
 
-import com.atguigu.lease.common.result.Result;
+import com.asluax.lease.common.result.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

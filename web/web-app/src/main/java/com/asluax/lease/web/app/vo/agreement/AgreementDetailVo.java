@@ -1,7 +1,7 @@
 package com.asluax.lease.web.app.vo.agreement;
 
-import com.atguigu.lease.model.entity.LeaseAgreement;
-import com.atguigu.lease.web.app.vo.graph.GraphVo;
+import com.asluax.lease.model.entity.LeaseAgreement;
+import com.asluax.lease.web.app.vo.graph.GraphVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

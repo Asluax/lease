@@ -1,8 +1,8 @@
 package com.asluax.lease.web.admin.service.impl;
 
-import com.atguigu.lease.model.entity.ApartmentInfo;
-import com.atguigu.lease.web.admin.mapper.ApartmentInfoMapper;
-import com.atguigu.lease.web.admin.service.ApartmentInfoService;
+import com.asluax.lease.model.entity.ApartmentInfo;
+import com.asluax.lease.web.admin.mapper.ApartmentInfoMapper;
+import com.asluax.lease.web.admin.service.ApartmentInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

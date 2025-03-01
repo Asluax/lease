@@ -26,6 +26,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.asluax</groupId>
             <artifactId>common</artifactId>

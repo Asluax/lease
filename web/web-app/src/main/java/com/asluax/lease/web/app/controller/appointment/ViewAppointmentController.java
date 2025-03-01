@@ -1,10 +1,10 @@
 package com.asluax.lease.web.app.controller.appointment;
 
 
-import com.atguigu.lease.common.result.Result;
-import com.atguigu.lease.model.entity.ViewAppointment;
-import com.atguigu.lease.web.app.vo.appointment.AppointmentDetailVo;
-import com.atguigu.lease.web.app.vo.appointment.AppointmentItemVo;
+import com.asluax.lease.common.result.Result;
+import com.asluax.lease.model.entity.ViewAppointment;
+import com.asluax.lease.web.app.vo.appointment.AppointmentDetailVo;
+import com.asluax.lease.web.app.vo.appointment.AppointmentItemVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;

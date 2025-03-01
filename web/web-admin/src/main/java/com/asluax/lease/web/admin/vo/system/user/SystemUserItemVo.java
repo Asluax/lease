@@ -1,6 +1,7 @@
 package com.asluax.lease.web.admin.vo.system.user;
 
-import com.atguigu.lease.model.entity.SystemUser;
+
+import com.asluax.lease.model.entity.SystemUser;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

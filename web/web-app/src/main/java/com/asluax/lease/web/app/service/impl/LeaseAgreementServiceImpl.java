@@ -1,18 +1,10 @@
 package com.asluax.lease.web.app.service.impl;
 
-import com.atguigu.lease.model.entity.*;
-import com.atguigu.lease.model.enums.ItemType;
-import com.atguigu.lease.web.app.mapper.*;
-import com.atguigu.lease.web.app.service.LeaseAgreementService;
-import com.atguigu.lease.web.app.vo.agreement.AgreementDetailVo;
-import com.atguigu.lease.web.app.vo.agreement.AgreementItemVo;
-import com.atguigu.lease.web.app.vo.graph.GraphVo;
+import com.asluax.lease.model.entity.*;
+import com.asluax.lease.web.app.mapper.*;
+import com.asluax.lease.web.app.service.LeaseAgreementService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author liubo

@@ -6,6 +6,7 @@ import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+//*Knife4j配置
 @Configuration
 public class Knife4jConfiguration {
 

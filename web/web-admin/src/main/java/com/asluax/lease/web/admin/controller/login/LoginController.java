@@ -2,17 +2,22 @@ package com.asluax.lease.web.admin.controller.login;
 
 
 import com.asluax.lease.common.result.Result;
+import com.asluax.lease.web.admin.service.LoginService;
 import com.asluax.lease.web.admin.vo.login.CaptchaVo;
 import com.asluax.lease.web.admin.vo.login.LoginVo;
 import com.asluax.lease.web.admin.vo.system.user.SystemUserInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "后台管理系统登录管理")
 @RestController
 @RequestMapping("/admin")
 public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
 
     @Operation(summary = "获取图形验证码")
     @GetMapping("login/captcha")

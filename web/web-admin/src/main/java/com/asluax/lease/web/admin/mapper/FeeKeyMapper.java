@@ -2,7 +2,10 @@ package com.asluax.lease.web.admin.mapper;
 
 
 import com.asluax.lease.model.entity.FeeKey;
+import com.asluax.lease.web.admin.vo.fee.FeeKeyVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -12,6 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface FeeKeyMapper extends BaseMapper<FeeKey> {
 
+    List<FeeKeyVo> getFeeList();
 }
 
 

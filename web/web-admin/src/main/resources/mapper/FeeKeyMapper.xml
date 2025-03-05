@@ -4,4 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asluax.lease.web.admin.mapper.FeeKeyMapper">
 
+    <resultMap id="getFeeList" type="com.asluax.lease.web.admin.vo.fee.FeeKeyVo">
+        <id column="kid" property="id"/>
+        <result column="kname" property="name" />
+        <collection property="feeValueList" ofType="com.asluax.lease.model.entity.FeeValue">
+            <id column="vid" property="id" />
+            <result column="vname" property="name"/>
+            <result column="unit" property="unit"/>
+            <result column="fee_key_id" property="feeKeyId"/>
+        </collection>
+    </resultMap>
+
+    <select id="getFeeList" resultMap="getFeeList">
+        SELECT
+            k.id  kid,
+            v.id  vid,
+            k.`name` kname,
+            v.`name` vname,
+            unit,
+            fee_key_id
+        FROM
+            fee_key k
+                LEFT JOIN fee_value v ON k.id = fee_key_id and v.is_deleted = 0
+        WHERE k.is_deleted = 0
+    </select>
 </mapper>

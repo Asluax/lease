@@ -1,7 +1,12 @@
 package com.asluax.lease.web.admin.service;
 
 import com.asluax.lease.model.entity.RoomInfo;
+import com.asluax.lease.web.admin.vo.room.RoomItemVo;
+import com.asluax.lease.web.admin.vo.room.RoomQueryVo;
+import com.asluax.lease.web.admin.vo.room.RoomSubmitVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -10,4 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RoomInfoService extends IService<RoomInfo> {
 
+    void saveOrUpdateByVo(RoomSubmitVo roomSubmitVo);
+
+    List<RoomInfo> getListByQueryVo(RoomQueryVo queryVo);
+
+    List<RoomItemVo> getVoList(List<RoomInfo> roomInfoList);
 }

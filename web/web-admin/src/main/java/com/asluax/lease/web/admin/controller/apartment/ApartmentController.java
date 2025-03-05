@@ -3,7 +3,6 @@ package com.asluax.lease.web.admin.controller.apartment;
 
 import com.asluax.lease.common.result.Result;
 import com.asluax.lease.model.entity.ApartmentInfo;
-import com.asluax.lease.model.entity.RoomInfo;
 import com.asluax.lease.model.enums.ReleaseStatus;
 import com.asluax.lease.web.admin.service.ApartmentInfoService;
 import com.asluax.lease.web.admin.service.RoomInfoService;
@@ -13,16 +12,13 @@ import com.asluax.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentQueryVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentSubmitVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -44,36 +40,21 @@ public class ApartmentController {
         return Result.ok(apartmentInfoService.saveOrUpdate(apartmentInfo));
     }
 
-    //*分析，返回结果需要包含房间总数和空闲房间数，这两参数需要查询room_info，并且包含分页查询和条件查询(省份ID，城市ID，区域ID),难度极大
+    //*分析，返回结果需要包含房间总数和空闲房间数，这两参数需要查询room_info，并且包含分页查询和条件查询(省份ID，城市ID，区域ID)
     @Operation(summary = "根据条件分页查询公寓列表")
     @GetMapping("pageItem")
     public Result<IPage<ApartmentItemVo>> pageItem(@RequestParam long current, @RequestParam long size, ApartmentQueryVo queryVo) {
-        //*调价查询所有符合条件的公寓
-        HashMap<SFunction<ApartmentInfo, ?>, Long> apartmentMap = new HashMap<>();
-        if (queryVo.getProvinceId() != null)
-            apartmentMap.put(ApartmentInfo::getProvinceId, queryVo.getProvinceId());
-        if (queryVo.getCityId() != null)
-            apartmentMap.put(ApartmentInfo::getCityId, queryVo.getCityId());
-        if (queryVo.getDistrictId() != null)
-            apartmentMap.put(ApartmentInfo::getDistrictId, queryVo.getDistrictId());
-        List<ApartmentInfo> apartmentInfoList = apartmentInfoService.lambdaQuery().allEq(apartmentMap).list();
+        //*查询所有符合条件的公寓
+        List<ApartmentInfo> apartmentInfoList = apartmentInfoService.getApartmentByQueryVo(queryVo);
         //*根据查询的公寓ID查询所有公寓的房间ID,一次遍历找到所有结果集
-        HashMap<SFunction<RoomInfo, ?>, Long> roomMap = new HashMap<>();
-        List<ApartmentItemVo> list = new ArrayList<>();
-        apartmentInfoList.forEach(apartmentInfo -> {
-            //*根据公寓ID找到所属房间ID
-            LambdaQueryChainWrapper<RoomInfo> queryWrapper = roomInfoService.lambdaQuery().eq(RoomInfo::getApartmentId, apartmentInfo.getId());
-            Long totalRoomCount = queryWrapper.count();//*房间总数
-            Long freeRoomCount = queryWrapper.eq(RoomInfo::getIsRelease, 1).count(); //*剩余房间数
-            ApartmentItemVo vo = new ApartmentItemVo();
-            BeanUtils.copyProperties(apartmentInfo, vo);
-            vo.setTotalRoomCount(totalRoomCount);
-            vo.setFreeRoomCount(freeRoomCount);
-            list.add(vo);
-        });
+        List<ApartmentItemVo> list = apartmentInfoService.getVoList(apartmentInfoList);
+        //* 自定义分页
         IPage<ApartmentItemVo> iPage = GetPages.getPageFromList(list, current, size);
         return Result.ok(iPage);
     }
+
+    @NotNull
+
 
     @Operation(summary = "根据ID获取公寓详细信息")
     @GetMapping("getDetailById")
@@ -87,6 +68,10 @@ public class ApartmentController {
     @Operation(summary = "根据id删除公寓信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {
+
+
+
+
         return Result.ok(apartmentInfoService.removeById(id));
     }
 
@@ -102,7 +87,8 @@ public class ApartmentController {
     @Operation(summary = "根据区县id查询公寓信息列表")
     @GetMapping("listInfoByDistrictId")
     public Result<List<ApartmentInfo>> listInfoByDistrictId(@RequestParam Long id) {
-        return Result.ok();
+        List<ApartmentInfo> list = apartmentInfoService.lambdaQuery().eq(ApartmentInfo::getDistrictId, id).list();
+        return Result.ok(list);
     }
 }
 

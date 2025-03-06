@@ -35,10 +35,10 @@ public class RoomController {
 
     @Operation(summary = "根据条件分页查询房间列表")
     @GetMapping("pageItem")
-    public Result<IPage<RoomInfo>> pageItem(@RequestParam long current, @RequestParam long size, RoomQueryVo queryVo) {
+    public Result<IPage<RoomItemVo>> pageItem(@RequestParam long current, @RequestParam long size, RoomQueryVo queryVo) {
         List<RoomInfo> roomInfoList = roomInfoService.getListByQueryVo(queryVo);
         List<RoomItemVo> roomItemVos = roomInfoService.getVoList(roomInfoList);
-        IPage<RoomInfo> iPage = GetPages.getPageFromList(roomInfoList, current, size);
+        IPage<RoomItemVo> iPage = GetPages.getPageFromList(roomItemVos, current, size);
         return Result.ok(iPage);
     }
 

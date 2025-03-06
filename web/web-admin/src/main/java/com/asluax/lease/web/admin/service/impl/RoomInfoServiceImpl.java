@@ -1,21 +1,19 @@
 package com.asluax.lease.web.admin.service.impl;
 
 import com.asluax.lease.model.entity.*;
+import com.asluax.lease.model.enums.LeaseStatus;
 import com.asluax.lease.web.admin.mapper.RoomInfoMapper;
 import com.asluax.lease.web.admin.service.*;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentQueryVo;
 import com.asluax.lease.web.admin.vo.room.RoomItemVo;
 import com.asluax.lease.web.admin.vo.room.RoomQueryVo;
 import com.asluax.lease.web.admin.vo.room.RoomSubmitVo;
-import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +38,8 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
     LeaseTermService leaseTermService;
     @Autowired
     ApartmentInfoService apartmentInfoService;
+    @Autowired
+    LeaseAgreementService leaseAgreementService;
 
     @Override
     public void saveOrUpdateByVo(RoomSubmitVo roomSubmitVo) {
@@ -66,19 +66,32 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
         }
         ApartmentQueryVo vo = copyProperties(queryVo, ApartmentQueryVo.class);
         List<ApartmentInfo> apartmentInfoList = apartmentInfoService.getApartmentByQueryVo(vo);
-        List<ApartmentInfo> list = apartmentInfoList.stream().filter(apartmentInfo ->
-                        Objects.equals(apartmentInfo.getId(), queryVo.getApartmentId()))
-                .toList();
-        HashMap<SFunction<RoomInfo, ?>, Long> map = new HashMap<>();
-        list.forEach(apartmentInfo ->
-                map.put(RoomInfo::getApartmentId,apartmentInfo.getId()));
-
-        return lambdaQuery().allEq(map).list();
+        List<Long> list = apartmentInfoList.stream().map(ApartmentInfo::getId).toList();
+        return lambdaQuery().in(RoomInfo::getApartmentId,list).list();
     }
 
     @Override
     public List<RoomItemVo> getVoList(List<RoomInfo> roomInfoList) {
-        return List.of();
+        List<RoomItemVo> roomItemVos = copyList(roomInfoList, RoomItemVo.class);
+        roomItemVos.forEach(
+                roomItemVo -> {
+                    List<LeaseAgreement> leaseAgreements = leaseAgreementService.lambdaQuery()
+                            .eq(LeaseAgreement::getRoomId, roomItemVo.getId())
+                            .ne(LeaseAgreement::getStatus, LeaseStatus.EXPIRED)
+                            .orderByAsc(LeaseAgreement::getLeaseEndDate).list();
+                    if (leaseAgreements!=null && !leaseAgreements.isEmpty()) {
+                        LeaseAgreement leaseAgreement = leaseAgreements.get(0);
+                        roomItemVo.setLeaseEndDate(leaseAgreement.getLeaseEndDate());
+                        roomItemVo.setIsCheckIn(leaseAgreement.getStatus() == LeaseStatus.SIGNED
+                                || leaseAgreement.getStatus() == LeaseStatus.WITHDRAWING
+                                || leaseAgreement.getStatus() == LeaseStatus.RENEWING);
+                    }
+                    roomItemVo.setIsCheckIn(false);
+                    ApartmentInfo info = apartmentInfoService.getById(roomItemVo.getApartmentId());
+                    roomItemVo.setApartmentInfo(info);
+                }
+        );
+        return roomItemVos;
     }
 
     //*对象拷贝

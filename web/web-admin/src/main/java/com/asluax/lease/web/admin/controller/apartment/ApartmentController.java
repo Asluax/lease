@@ -32,6 +32,7 @@ public class ApartmentController {
     @Autowired
     RoomInfoService roomInfoService;
 
+    // todo 未完成
     @Operation(summary = "保存或更新公寓信息")
     @PostMapping("saveOrUpdate")
     public Result saveOrUpdate(@RequestBody ApartmentSubmitVo apartmentSubmitVo) {
@@ -55,7 +56,7 @@ public class ApartmentController {
 
     @NotNull
 
-
+    // todo 未完成
     @Operation(summary = "根据ID获取公寓详细信息")
     @GetMapping("getDetailById")
     public Result<ApartmentDetailVo> getDetailById(@RequestParam Long id) {
@@ -64,7 +65,7 @@ public class ApartmentController {
         BeanUtils.copyProperties(info, vo);
         return Result.ok(vo);
     }
-
+    // todo 未完成
     @Operation(summary = "根据id删除公寓信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {

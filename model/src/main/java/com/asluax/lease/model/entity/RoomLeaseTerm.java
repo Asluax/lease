@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
 @TableName(value = "room_lease_term")
 @Data
 @Schema(description = "房间租期关系表")
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomLeaseTerm extends BaseEntity {

@@ -26,3 +26,8 @@ server:
   port: 8080
 springdoc:
   default-flat-param-object: true
+minio:
+  endpoint: http://47.79.85.176:9000
+  access-key: asluax
+  secret-key: abc350587745
+  bucket-name: lease

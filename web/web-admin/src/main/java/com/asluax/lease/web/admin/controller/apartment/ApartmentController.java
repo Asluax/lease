@@ -5,7 +5,6 @@ import com.asluax.lease.common.result.Result;
 import com.asluax.lease.model.entity.ApartmentInfo;
 import com.asluax.lease.model.enums.ReleaseStatus;
 import com.asluax.lease.web.admin.service.ApartmentInfoService;
-import com.asluax.lease.web.admin.service.RoomInfoService;
 import com.asluax.lease.web.admin.utils.GetPages;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentDetailVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentItemVo;
@@ -15,7 +14,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +27,14 @@ public class ApartmentController {
 
     @Autowired
     ApartmentInfoService apartmentInfoService;
-    @Autowired
-    RoomInfoService roomInfoService;
 
-    // todo 未完成
+
+
     @Operation(summary = "保存或更新公寓信息")
     @PostMapping("saveOrUpdate")
     public Result saveOrUpdate(@RequestBody ApartmentSubmitVo apartmentSubmitVo) {
-        ApartmentInfo apartmentInfo = new ApartmentInfo();
-        BeanUtils.copyProperties(apartmentSubmitVo, apartmentInfo);
-        return Result.ok(apartmentInfoService.saveOrUpdate(apartmentInfo));
+        apartmentInfoService.saveOrUpdateVo(apartmentSubmitVo);
+        return Result.ok();
     }
 
     //*分析，返回结果需要包含房间总数和空闲房间数，这两参数需要查询room_info，并且包含分页查询和条件查询(省份ID，城市ID，区域ID)
@@ -55,23 +51,15 @@ public class ApartmentController {
     }
 
     @NotNull
-
-    // todo 未完成
     @Operation(summary = "根据ID获取公寓详细信息")
     @GetMapping("getDetailById")
     public Result<ApartmentDetailVo> getDetailById(@RequestParam Long id) {
-        ApartmentInfo info = apartmentInfoService.getById(id);
-        ApartmentDetailVo vo = new ApartmentDetailVo();
-        BeanUtils.copyProperties(info, vo);
-        return Result.ok(vo);
+        return Result.ok(apartmentInfoService.getDetailById(id));
     }
     // todo 未完成
     @Operation(summary = "根据id删除公寓信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {
-
-
-
 
         return Result.ok(apartmentInfoService.removeById(id));
     }

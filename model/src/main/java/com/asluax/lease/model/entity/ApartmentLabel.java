@@ -3,13 +3,11 @@ package com.asluax.lease.model.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Data;
 
 @Schema(description = "公寓标签关联表")
 @TableName(value = "apartment_label")
 @Data
-@Builder
 public class ApartmentLabel extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

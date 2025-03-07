@@ -1,8 +1,10 @@
 package com.asluax.lease.web.admin.service;
 
 import com.asluax.lease.model.entity.ApartmentInfo;
+import com.asluax.lease.web.admin.vo.apartment.ApartmentDetailVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentQueryVo;
+import com.asluax.lease.web.admin.vo.apartment.ApartmentSubmitVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -17,4 +19,8 @@ public interface ApartmentInfoService extends IService<ApartmentInfo> {
     List<ApartmentItemVo> getVoList(List<ApartmentInfo> apartmentInfoList);
 
     List<ApartmentInfo> getApartmentByQueryVo(ApartmentQueryVo queryVo);
+
+    void saveOrUpdateVo(ApartmentSubmitVo apartmentSubmitVo);
+
+    ApartmentDetailVo getDetailById(Long id);
 }

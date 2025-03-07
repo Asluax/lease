@@ -24,8 +24,7 @@ public class FileUploadController {
     @Operation(summary = "上传文件")
     @PostMapping("upload")
     public Result<String> upload(@RequestParam MultipartFile file) {
-
-        return Result.ok();
+        return Result.ok(fileService.upload(file));
     }
 
 }

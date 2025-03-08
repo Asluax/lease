@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "房间租期关系表")
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoomLeaseTerm extends BaseEntity {
+public class RoomLeaseTerm extends DeleteBaseEntity {
 
     private static final long serialVersionUID = 1L;
 

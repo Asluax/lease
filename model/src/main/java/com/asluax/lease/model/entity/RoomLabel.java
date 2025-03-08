@@ -8,7 +8,7 @@ import lombok.Data;
 @Schema(description = "房间&标签关联表")
 @TableName(value = "room_label")
 @Data
-public class RoomLabel extends BaseEntity {
+public class RoomLabel extends DeleteBaseEntity {
 
     private static final long serialVersionUID = 1L;
 

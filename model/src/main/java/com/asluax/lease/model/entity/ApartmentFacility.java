@@ -8,7 +8,7 @@ import lombok.Data;
 @Schema(description = "公寓&配套关系")
 @TableName(value = "apartment_facility")
 @Data
-public class ApartmentFacility extends BaseEntity {
+public class ApartmentFacility extends DeleteBaseEntity {
 
     private static final long serialVersionUID = 1L;
 

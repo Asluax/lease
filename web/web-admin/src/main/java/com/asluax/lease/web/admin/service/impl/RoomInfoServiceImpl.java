@@ -85,7 +85,8 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
                                 || leaseAgreement.getStatus() == LeaseStatus.WITHDRAWING
                                 || leaseAgreement.getStatus() == LeaseStatus.RENEWING);
                     }
-                    roomItemVo.setIsCheckIn(false);
+                    else
+                        roomItemVo.setIsCheckIn(false);
                     ApartmentInfo info = apartmentInfoService.getById(roomItemVo.getApartmentId());
                     roomItemVo.setApartmentInfo(info);
                 }

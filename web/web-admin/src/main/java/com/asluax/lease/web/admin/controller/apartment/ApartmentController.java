@@ -60,8 +60,8 @@ public class ApartmentController {
     @Operation(summary = "根据id删除公寓信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {
-
-        return Result.ok(apartmentInfoService.removeById(id));
+        apartmentInfoService.removeApartmentById(id);
+        return Result.ok();
     }
 
     @Operation(summary = "根据id修改公寓发布状态")

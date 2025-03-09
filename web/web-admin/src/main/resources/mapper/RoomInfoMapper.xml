@@ -3,5 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asluax.lease.web.admin.mapper.RoomInfoMapper">
+    <resultMap id="RoomItemVo" type="com.asluax.lease.web.admin.vo.room.RoomItemVo" autoMapping="true">
+        <id property="id" column="rid"/>
+        <association property="apartmentInfo" javaType="com.asluax.lease.model.entity.ApartmentInfo" autoMapping="true">
+           <id  property="id" column="aid"/>
+        </association>
+    </resultMap>
+    <select id="getRoomInfoByPageItem" resultMap="RoomItemVo">
+        SELECT
+            ri.*,
+            ri.id as rid,
+            la.lease_end_date,
+            la.status is not NULL as is_check_in,
+            ai.id as aid,
+            ai.*
+        FROM
+            room_info ri
+                LEFT JOIN (select lease_end_date, status, id, room_id, is_deleted from lease_agreement where status in (2, 5, 7)) la ON room_id = ri.id
+                AND la.is_deleted = 0
+                LEFT JOIN apartment_info ai ON ai.id = ri.apartment_id
+                AND ai.is_deleted = 0
 
+        <trim prefix="WHERE" prefixOverrides="AND">
+        <if test="queryVo.provinceId!=null and queryVo.provinceId!=''">
+            and ai.province_id = #{queryVo.provinceId}
+        </if>
+        <if test="queryVo.cityId!=null and queryVo.cityId!=''">
+            and ai.city_id = #{queryVo.cityId}
+        </if>
+        <if test="queryVo.districtId!=null and queryVo.districtId!=''">
+            and ai.district_id = #{queryVo.districtId}
+        </if>
+        <if test="queryVo.apartmentId!=null and queryVo.apartmentId!=''">
+            and ai.id = #{queryVo.apartmentId}
+        </if>
+        </trim>
+    </select>
 </mapper>

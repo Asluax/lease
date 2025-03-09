@@ -1,5 +1,6 @@
 package com.asluax.lease.web.admin.service.impl;
 
+import com.asluax.lease.common.exception.MyAssert;
 import com.asluax.lease.model.entity.*;
 import com.asluax.lease.model.enums.ItemType;
 import com.asluax.lease.web.admin.mapper.ApartmentInfoMapper;
@@ -12,6 +13,7 @@ import com.asluax.lease.web.admin.vo.apartment.ApartmentSubmitVo;
 import com.asluax.lease.web.admin.vo.fee.FeeValueVo;
 import com.asluax.lease.web.admin.vo.graph.GraphVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -61,6 +63,9 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
     CityInfoService cityInfoService;
     @Autowired
     DistrictInfoService districtInfoService;
+    @Lazy
+    @Autowired
+    ApartmentInfoService apartmentInfoService;
 
     @Override
     public void saveOrUpdateVo(ApartmentSubmitVo apartmentSubmitVo) {
@@ -76,7 +81,7 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         apartmentSubmitVo.setDistrictName(districtInfo.getName());
         saveOrUpdate(apartmentSubmitVo);
         Long id = apartmentSubmitVo.getId();
-        if(id!=null){
+        if (id != null) {
             //* id为空执行更新操作，先删除公寓关系表
             removeApartmentOther(id);
         }
@@ -132,20 +137,26 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         //* 公寓标签列表封装
         List<ApartmentLabel> apartmentLabelList = apartmentLabelService.lambdaQuery().eq(ApartmentLabel::getApartmentId, apartmentId).list();
         List<Long> lableList = apartmentLabelList.stream().map(ApartmentLabel::getLabelId).toList();
-        List<LabelInfo> labelInfoList = labelInfoService.lambdaQuery().in(LabelInfo::getId, lableList).list();
-        vo.setLabelInfoList(labelInfoList);
+        if (!CollectionUtils.isEmpty(lableList)) {
+            List<LabelInfo> labelInfoList = labelInfoService.lambdaQuery().in(LabelInfo::getId, lableList).list();
+            vo.setLabelInfoList(labelInfoList);
+        }
         //* 公寓配套列表封装
         List<ApartmentFacility> apartmentFacilityList = apartmentFacilityService.lambdaQuery().eq(ApartmentFacility::getApartmentId, apartmentId).list();
         List<Long> facilityList = apartmentFacilityList.stream().map(ApartmentFacility::getFacilityId).toList();
-        List<FacilityInfo> facilityInfoList = facilityInfoService.lambdaQuery().in(FacilityInfo::getId, facilityList).list();
-        vo.setFacilityInfoList(facilityInfoList);
+        if (!CollectionUtils.isEmpty(facilityList)) {
+            List<FacilityInfo> facilityInfoList = facilityInfoService.lambdaQuery().in(FacilityInfo::getId, facilityList).list();
+            vo.setFacilityInfoList(facilityInfoList);
+        }
         //* 杂费列表封装
         List<ApartmentFeeValue> feeList = apartmentFeeValueService.lambdaQuery().eq(ApartmentFeeValue::getApartmentId, apartmentId).list();
         List<Long> feeValueList = feeList.stream().map(ApartmentFeeValue::getFeeValueId).toList();
-        List<FeeValue> feeValues = feeValueService.lambdaQuery().in(FeeValue::getId, feeValueList).list();
-        List<FeeValueVo> feeValueVoList = CopyUtil.copyList(feeValues, FeeValueVo.class);
-        feeValueVoList.forEach(feeValueVo -> feeValueVo.setFeeKeyName(feeKeyService.getById(feeValueVo.getFeeKeyId()).getName()));
-        vo.setFeeValueVoList(feeValueVoList);
+        if (!CollectionUtils.isEmpty(feeValueList)) {
+            List<FeeValue> feeValues = feeValueService.lambdaQuery().in(FeeValue::getId, feeValueList).list();
+            List<FeeValueVo> feeValueVoList = CopyUtil.copyList(feeValues, FeeValueVo.class);
+            feeValueVoList.forEach(feeValueVo -> feeValueVo.setFeeKeyName(feeKeyService.getById(feeValueVo.getFeeKeyId()).getName()));
+            vo.setFeeValueVoList(feeValueVoList);
+        }
         return vo;
     }
 
@@ -157,16 +168,16 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         //* 删除公寓设施关联
         //* 删除公寓图片
         Long count = roomInfoService.lambdaQuery().eq(RoomInfo::getApartmentId, id).count();
-
-
+        MyAssert.isTrue(count <= 0, "公寓存在房间，无法删除");
         removeApartmentOther(id);
+        apartmentInfoService.removeById(id);
     }
 
     private void removeApartmentOther(Long id) {
-        apartmentFacilityService.remove(new LambdaQueryWrapper<ApartmentFacility>().eq(ApartmentFacility::getApartmentId,id));
-        graphInfoService.remove(new LambdaQueryWrapper<GraphInfo>().eq(GraphInfo::getItemType, ItemType.APARTMENT).eq(GraphInfo::getItemId,id));
-        apartmentFeeValueService.remove(new LambdaQueryWrapper<ApartmentFeeValue>().eq(ApartmentFeeValue::getApartmentId,id));
-        apartmentLabelService.remove(new LambdaQueryWrapper<ApartmentLabel>().eq(ApartmentLabel::getApartmentId,id));
+        apartmentFacilityService.remove(new LambdaQueryWrapper<ApartmentFacility>().eq(ApartmentFacility::getApartmentId, id));
+        graphInfoService.remove(new LambdaQueryWrapper<GraphInfo>().eq(GraphInfo::getItemType, ItemType.APARTMENT).eq(GraphInfo::getItemId, id));
+        apartmentFeeValueService.remove(new LambdaQueryWrapper<ApartmentFeeValue>().eq(ApartmentFeeValue::getApartmentId, id));
+        apartmentLabelService.remove(new LambdaQueryWrapper<ApartmentLabel>().eq(ApartmentLabel::getApartmentId, id));
     }
 
     //* 条件查询公寓信息

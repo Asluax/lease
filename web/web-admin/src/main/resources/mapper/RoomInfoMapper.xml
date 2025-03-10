@@ -25,6 +25,7 @@
                 AND ai.is_deleted = 0
 
         <trim prefix="WHERE" prefixOverrides="AND">
+            ri.is_deleted = 0
         <if test="queryVo.provinceId!=null and queryVo.provinceId!=''">
             and ai.province_id = #{queryVo.provinceId}
         </if>

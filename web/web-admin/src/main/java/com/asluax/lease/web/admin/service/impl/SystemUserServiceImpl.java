@@ -3,6 +3,9 @@ package com.asluax.lease.web.admin.service.impl;
 import com.asluax.lease.model.entity.SystemUser;
 import com.asluax.lease.web.admin.mapper.SystemUserMapper;
 import com.asluax.lease.web.admin.service.SystemUserService;
+import com.asluax.lease.web.admin.vo.system.user.SystemUserItemVo;
+import com.asluax.lease.web.admin.vo.system.user.SystemUserQueryVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemUser>
         implements SystemUserService {
 
+    @Override
+    public IPage<SystemUserItemVo> getSystemUserItemVoPage(IPage<SystemUserItemVo> iPage, SystemUserQueryVo queryVo) {
+        return baseMapper.getSystemUserItemVoPage(iPage,queryVo);
+    }
 }
 
 

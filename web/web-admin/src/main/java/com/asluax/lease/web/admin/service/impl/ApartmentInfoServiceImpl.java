@@ -163,10 +163,6 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
     //*删除公寓及相关内容
     @Override
     public void removeApartmentById(Long id) {
-        //* 删除公寓标签关联
-        //* 删除公寓杂费关联
-        //* 删除公寓设施关联
-        //* 删除公寓图片
         Long count = roomInfoService.lambdaQuery().eq(RoomInfo::getApartmentId, id).count();
         MyAssert.isTrue(count <= 0, "公寓存在房间，无法删除");
         removeApartmentOther(id);

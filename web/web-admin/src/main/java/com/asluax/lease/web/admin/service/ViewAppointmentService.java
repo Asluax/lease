@@ -1,6 +1,9 @@
 package com.asluax.lease.web.admin.service;
 
 import com.asluax.lease.model.entity.ViewAppointment;
+import com.asluax.lease.web.admin.vo.appointment.AppointmentQueryVo;
+import com.asluax.lease.web.admin.vo.appointment.AppointmentVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ViewAppointmentService extends IService<ViewAppointment> {
 
+    IPage<AppointmentVo> pageAppointmentByQuery(IPage<AppointmentVo> iPage, AppointmentQueryVo queryVo);
 }

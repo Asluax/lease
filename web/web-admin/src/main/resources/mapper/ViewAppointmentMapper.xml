@@ -4,4 +4,54 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asluax.lease.web.admin.mapper.ViewAppointmentMapper">
 
+    <resultMap id="AppointmentVoMap" type="com.asluax.lease.web.admin.vo.appointment.AppointmentVo" autoMapping="true">
+        <id property="id" column="vid"/>
+        <result property="name" column="vname"/>
+        <association property="apartmentInfo" javaType="com.asluax.lease.model.entity.ApartmentInfo"
+                     autoMapping="true">
+            <id property="id" column="aid"/>
+            <result property="name" column="aname"/>
+        </association>
+    </resultMap>
+
+    <select id="pageAppointmentByQuery" resultMap="AppointmentVoMap">
+    select
+    va.user_id,
+    va.name,
+    va.phone,
+    va.appointment_time,
+    va.additional_info,
+    va.appointment_status,
+    ai.name apartment_name,
+    ai.district_id,
+    ai.district_name,
+    ai.city_id,
+    ai.city_name,
+    ai.province_id,
+    ai.province_name
+    , va.id as vid, ai.id as aid, va.name as vname, ai.name as aname
+    from view_appointment va
+    left join apartment_info ai on va.apartment_id = ai.id and ai.is_deleted = 0
+    <where>
+        va.is_deleted=0
+        <if test="queryVo.provinceId!=null and queryVo.provinceId!=''">
+            and ai.province_id = #{queryVo.provinceId}
+        </if>
+        <if test="queryVo.cityId!=null and queryVo.cityId!=''">
+            and ai.city_id = #{queryVo.cityId}
+        </if>
+        <if test="queryVo.districtId!=null and queryVo.districtId!=''">
+            and ai.district_id = #{queryVo.districtId}
+        </if>
+        <if test="queryVo.apartmentId!=null and queryVo.apartmentId!=''">
+            and va.apartment_id = #{queryVo.apartmentId}
+        </if>
+        <if test="queryVo.name!=null and queryVo.name!=''">
+            and va.name like "%"#{queryVo.name}"%"
+        </if>
+        <if test="queryVo.phone!=null and queryVo.phone!=''">
+            and va.phone like "%"#{queryVo.phone}"%"
+        </if>
+    </where>
+    </select>
 </mapper>

@@ -43,26 +43,30 @@ public class RoomController {
     @Operation(summary = "根据id获取房间详细信息")
     @GetMapping("getDetailById")
     public Result<RoomDetailVo> getDetailById(@RequestParam Long id) {
-
         return Result.ok(roomInfoService.getDetailById(id));
     }
 
     @Operation(summary = "根据id删除房间信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {
+        roomInfoService.removeAllById(id);
         return Result.ok();
     }
 
     @Operation(summary = "根据id修改房间发布状态")
     @PostMapping("updateReleaseStatusById")
     public Result updateReleaseStatusById(Long id, ReleaseStatus status) {
+        RoomInfo roomInfo = new RoomInfo();
+        roomInfo.setId(id);
+        roomInfo.setIsRelease(status);
+        roomInfoService.updateById(roomInfo);
         return Result.ok();
     }
 
     @GetMapping("listBasicByApartmentId")
     @Operation(summary = "根据公寓id查询房间列表")
     public Result<List<RoomInfo>> listBasicByApartmentId(Long id) {
-        return Result.ok();
+        return Result.ok(roomInfoService.lambdaQuery().eq(RoomInfo::getApartmentId,id).list());
     }
 
 }

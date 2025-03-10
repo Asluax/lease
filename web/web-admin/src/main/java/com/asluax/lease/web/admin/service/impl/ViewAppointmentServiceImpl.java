@@ -3,6 +3,9 @@ package com.asluax.lease.web.admin.service.impl;
 import com.asluax.lease.model.entity.ViewAppointment;
 import com.asluax.lease.web.admin.mapper.ViewAppointmentMapper;
 import com.asluax.lease.web.admin.service.ViewAppointmentService;
+import com.asluax.lease.web.admin.vo.appointment.AppointmentQueryVo;
+import com.asluax.lease.web.admin.vo.appointment.AppointmentVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class ViewAppointmentServiceImpl extends ServiceImpl<ViewAppointmentMapper, ViewAppointment>
         implements ViewAppointmentService {
 
+    @Override
+    public IPage<AppointmentVo> pageAppointmentByQuery(IPage<AppointmentVo> iPage, AppointmentQueryVo queryVo) {
+        return baseMapper.pageAppointmentByQuery(iPage,queryVo);
+    }
 }
 
 

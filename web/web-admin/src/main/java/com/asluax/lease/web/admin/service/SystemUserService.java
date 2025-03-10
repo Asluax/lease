@@ -1,6 +1,9 @@
 package com.asluax.lease.web.admin.service;
 
 import com.asluax.lease.model.entity.SystemUser;
+import com.asluax.lease.web.admin.vo.system.user.SystemUserItemVo;
+import com.asluax.lease.web.admin.vo.system.user.SystemUserQueryVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SystemUserService extends IService<SystemUser> {
 
+    IPage<SystemUserItemVo> getSystemUserItemVoPage(IPage<SystemUserItemVo> iPage, SystemUserQueryVo queryVo);
 }

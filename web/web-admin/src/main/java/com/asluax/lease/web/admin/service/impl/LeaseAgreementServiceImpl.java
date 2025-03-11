@@ -29,7 +29,7 @@ public class LeaseAgreementServiceImpl extends ServiceImpl<LeaseAgreementMapper,
 
     @Override
     public AgreementVo getByIdVo(Long id) {
-        IPage<AgreementVo> page = baseMapper.getByPage(new Page<>(),new AgreementQueryVo());
+        IPage<AgreementVo> page = baseMapper.getByPage(new Page<>(-1,-1),new AgreementQueryVo());
         List<AgreementVo> list = page.getRecords().stream().filter(agreementVo ->
                 Objects.equals(agreementVo.getId(), id)).toList();
         if(!list.isEmpty()){

@@ -14,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface SystemUserService extends IService<SystemUser> {
 
     IPage<SystemUserItemVo> getSystemUserItemVoPage(IPage<SystemUserItemVo> iPage, SystemUserQueryVo queryVo);
+
+    SystemUserItemVo getByIdForVo(Long id);
 }

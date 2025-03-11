@@ -1,4 +1,4 @@
-package com.asluax.lease.web.admin.custom.config.converter;
+package com.asluax.lease.web.admin.custom.converter;
 
 import com.asluax.lease.model.enums.ItemType;
 import org.springframework.core.convert.converter.Converter;

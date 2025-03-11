@@ -5,7 +5,7 @@ import com.asluax.lease.common.result.Result;
 import com.asluax.lease.model.entity.ApartmentInfo;
 import com.asluax.lease.model.enums.ReleaseStatus;
 import com.asluax.lease.web.admin.service.ApartmentInfoService;
-import com.asluax.lease.web.admin.utils.GetPages;
+import com.asluax.lease.common.utils.GetPages;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentDetailVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentQueryVo;

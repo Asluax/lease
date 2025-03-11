@@ -84,7 +84,4 @@
             </if>
         </where>
     </select>
-    <select id="getByIdVo" resultType="com.asluax.lease.web.admin.vo.agreement.AgreementVo">
-
-    </select>
 </mapper>

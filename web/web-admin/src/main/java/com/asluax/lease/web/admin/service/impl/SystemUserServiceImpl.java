@@ -6,8 +6,12 @@ import com.asluax.lease.web.admin.service.SystemUserService;
 import com.asluax.lease.web.admin.vo.system.user.SystemUserItemVo;
 import com.asluax.lease.web.admin.vo.system.user.SystemUserQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -21,6 +25,16 @@ public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemU
     @Override
     public IPage<SystemUserItemVo> getSystemUserItemVoPage(IPage<SystemUserItemVo> iPage, SystemUserQueryVo queryVo) {
         return baseMapper.getSystemUserItemVoPage(iPage,queryVo);
+    }
+
+    @Override
+    public SystemUserItemVo getByIdForVo(Long id) {
+        IPage<SystemUserItemVo> page = getSystemUserItemVoPage(new Page<>(-1, -1), null);
+        List<SystemUserItemVo> list = page.getRecords();
+        if(!CollectionUtils.isEmpty(list)){
+            return list.get(1);
+        }
+        return null;
     }
 }
 

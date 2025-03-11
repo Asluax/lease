@@ -5,7 +5,7 @@ import com.asluax.lease.model.entity.*;
 import com.asluax.lease.model.enums.ItemType;
 import com.asluax.lease.web.admin.mapper.ApartmentInfoMapper;
 import com.asluax.lease.web.admin.service.*;
-import com.asluax.lease.web.admin.utils.CopyUtil;
+import com.asluax.lease.common.utils.CopyUtil;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentDetailVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.asluax.lease.web.admin.vo.apartment.ApartmentQueryVo;

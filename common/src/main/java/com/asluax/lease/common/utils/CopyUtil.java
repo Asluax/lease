@@ -1,4 +1,4 @@
-package com.asluax.lease.web.admin.utils;
+package com.asluax.lease.common.utils;
 
 import org.springframework.beans.BeanUtils;
 

@@ -34,7 +34,7 @@ public class SystemUserController {
     @Operation(summary = "根据ID查询后台用户信息")
     @GetMapping("getById")
     public Result<SystemUserItemVo> getById(@RequestParam Long id) {
-        return Result.ok();
+        return Result.ok(systemUserService.getByIdForVo(id));
     }
 
     @Operation(summary = "保存或更新后台用户信息")
@@ -49,18 +49,21 @@ public class SystemUserController {
     @Operation(summary = "判断后台用户名是否可用")
     @GetMapping("isUserNameAvailable")
     public Result<Boolean> isUsernameExists(@RequestParam String username) {
-        return Result.ok();
+        return Result.ok(!systemUserService.lambdaQuery().eq(SystemUser::getUsername, username).exists());
     }
 
     @DeleteMapping("deleteById")
     @Operation(summary = "根据ID删除后台用户信息")
     public Result removeById(@RequestParam Long id) {
-        return Result.ok();
+        return Result.ok(systemUserService.removeById(id));
     }
 
     @Operation(summary = "根据ID修改后台用户状态")
     @PostMapping("updateStatusByUserId")
     public Result updateStatusByUserId(@RequestParam Long id, @RequestParam BaseStatus status) {
-        return Result.ok();
+        SystemUser systemUser = new SystemUser();
+        systemUser.setId(id);
+        systemUser.setStatus(status);
+        return Result.ok(systemUserService.updateById(systemUser));
     }
 }

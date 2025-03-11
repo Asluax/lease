@@ -1,4 +1,4 @@
-package com.asluax.lease.web.admin.utils;
+package com.asluax.lease.common.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

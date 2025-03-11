@@ -3,13 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asluax.lease.web.admin.mapper.SystemUserMapper">
-
-    <select id="getSystemUserItemVoPage" resultType="com.asluax.lease.web.admin.vo.system.user.SystemUserItemVo">
+    <resultMap id="SystemUserItemVo" type="com.asluax.lease.web.admin.vo.system.user.SystemUserItemVo">
+        <result property="postName" column="post_name"/>
+    </resultMap>
+    <select id="getSystemUserItemVoPage" resultMap="SystemUserItemVo">
         select *
         from
             system_user
             left join
-            (select id pid, name postname from system_post) as sp
+            (select id pid, name post_name from system_post) as sp
             on post_id = pid
         <where>
             is_deleted = 0

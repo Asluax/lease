@@ -2,10 +2,12 @@ package com.asluax.lease.web.app.controller.login;
 
 
 import com.asluax.lease.common.result.Result;
+import com.asluax.lease.web.app.service.LoginService;
 import com.asluax.lease.web.app.vo.user.LoginVo;
 import com.asluax.lease.web.app.vo.user.UserInfoVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,21 +15,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/app/")
 public class LoginController {
 
+    @Autowired
+    LoginService loginService;
+
     @GetMapping("login/getCode")
     @Operation(summary = "获取短信验证码")
     public Result getCode(@RequestParam String phone) {
+        loginService.getCode(phone);
         return Result.ok();
     }
 
     @PostMapping("login")
     @Operation(summary = "登录")
     public Result<String> login(@RequestBody LoginVo loginVo) {
-        return Result.ok();
+        return Result.ok(loginService.login(loginVo));
     }
 
     @GetMapping("info")
     @Operation(summary = "获取登录用户信息")
     public Result<UserInfoVo> info() {
-        return Result.ok();
+        return Result.ok(loginService.info());
     }
 }

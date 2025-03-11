@@ -5,6 +5,7 @@ import com.asluax.lease.common.exception.MyException;
 import com.asluax.lease.common.result.ResultCodeEnum;
 import com.asluax.lease.common.utils.JwtUtil;
 import com.asluax.lease.model.entity.SystemUser;
+import com.asluax.lease.model.enums.BaseStatus;
 import com.asluax.lease.web.admin.service.LoginService;
 import com.asluax.lease.web.admin.service.SystemUserService;
 import com.asluax.lease.web.admin.vo.login.CaptchaVo;
@@ -73,6 +74,9 @@ public class LoginServiceImpl implements LoginService {
         //* 数据库查询结果password与前端传入参数不同
         if(!user.getPassword().equals(dpassword)){
             throw new MyException(ResultCodeEnum.ADMIN_ACCOUNT_ERROR);
+        }
+        if (user.getStatus().equals(BaseStatus.DISABLE)) {
+            throw new MyException(ResultCodeEnum.APP_ACCOUNT_DISABLED_ERROR);
         }
         return JwtUtil.createToken(user.getId(), user.getName());
     }

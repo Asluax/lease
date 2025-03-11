@@ -3,7 +3,9 @@ package com.asluax.lease.web.admin.controller.login;
 
 import com.asluax.lease.common.constant.LoginUser;
 import com.asluax.lease.common.constant.LoginUserContext;
+import com.asluax.lease.common.exception.MyException;
 import com.asluax.lease.common.result.Result;
+import com.asluax.lease.common.result.ResultCodeEnum;
 import com.asluax.lease.common.utils.CopyUtil;
 import com.asluax.lease.model.entity.SystemUser;
 import com.asluax.lease.web.admin.service.LoginService;
@@ -15,6 +17,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @Tag(name = "后台管理系统登录管理")
 @RestController
@@ -42,7 +46,10 @@ public class LoginController {
     @GetMapping("info")
     public Result<SystemUserInfoVo> info() {
         LoginUser loginUser = LoginUserContext.getLoginUser();
-        SystemUser user = systemUserService.getById(loginUser.getUserId());
-        return Result.ok(CopyUtil.copyProperties(user,SystemUserInfoVo.class));
+        if (!Objects.isNull(loginUser)) {
+            SystemUser user = systemUserService.getById(loginUser.getUserId());
+            return Result.ok(CopyUtil.copyProperties(user, SystemUserInfoVo.class));
+        }
+        throw new MyException(ResultCodeEnum.APP_LOGIN_AUTH);
     }
 }

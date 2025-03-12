@@ -1,6 +1,6 @@
 package com.asluax.lease.web.app.custom.interceptor;
 
-import com.asluax.lease.common.constant.LoginUser;
+import com.asluax.lease.common.constant.LoginUserApp;
 import com.asluax.lease.common.constant.LoginUserContext;
 import com.asluax.lease.common.exception.MyException;
 import com.asluax.lease.common.result.ResultCodeEnum;
@@ -23,14 +23,14 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         } else {
             Claims claims = JwtUtil.parseToken(token);
             Long userId = claims.get("userId", Long.class);
-            String username = claims.get("username", String.class);
-            LoginUserContext.setLoginUser(new LoginUser(userId, username));
+            String phone = claims.get("phone", String.class);
+            LoginUserContext.setLoginUserApp(new LoginUserApp(userId, phone));
         }
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        LoginUserContext.clear();
+        LoginUserContext.clearApp();
     }
 }

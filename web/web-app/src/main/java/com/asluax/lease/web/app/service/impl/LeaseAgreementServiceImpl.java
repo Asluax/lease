@@ -3,8 +3,12 @@ package com.asluax.lease.web.app.service.impl;
 import com.asluax.lease.model.entity.*;
 import com.asluax.lease.web.app.mapper.*;
 import com.asluax.lease.web.app.service.LeaseAgreementService;
+import com.asluax.lease.web.app.vo.agreement.AgreementDetailVo;
+import com.asluax.lease.web.app.vo.agreement.AgreementItemVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -16,6 +20,15 @@ public class LeaseAgreementServiceImpl extends ServiceImpl<LeaseAgreementMapper,
         implements LeaseAgreementService {
 
 
+    @Override
+    public List<AgreementItemVo> listItem(String phone) {
+        return baseMapper.listItem(phone);
+    }
+
+    @Override
+    public AgreementDetailVo getDetailById(Long id) {
+        return baseMapper.getDetailById(id);
+    }
 }
 
 

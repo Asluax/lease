@@ -1,6 +1,7 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.ApartmentInfo;
+import com.asluax.lease.web.app.vo.apartment.ApartmentDetailVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ApartmentInfoService extends IService<ApartmentInfo> {
 
+    ApartmentDetailVo getDetailById(Long id);
 }

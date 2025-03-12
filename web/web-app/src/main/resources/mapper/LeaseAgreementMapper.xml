@@ -4,5 +4,65 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asluax.lease.web.app.mapper.LeaseAgreementMapper">
 
+    <resultMap id="AgreementItemVo" type="com.asluax.lease.web.app.vo.agreement.AgreementItemVo" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="apartmentName" column="aname"/>
+        <collection property="roomGraphVoList" ofType="com.asluax.lease.web.app.vo.graph.GraphVo" autoMapping="true">
+            <result property="name" column="gname"/>
+        </collection>
+    </resultMap>
+    <select id="listItem" resultMap="AgreementItemVo">
+        SELECT
+            la.id,
+            gi.name gname,
+            gi.url,
+            ai.name aname,
+            ri.room_number,
+            la.status lease_status,
+            la.lease_start_date,
+            la.lease_end_date,
+            la.source_type,
+            la.rent,
+            if(la.`status`=7,TRUE,FALSE) as is_renewable
+        FROM
+            lease_agreement la
+                LEFT JOIN graph_info gi on gi.item_type = 2 and gi.item_id = la.room_id and gi.is_deleted = 0
+                LEFT JOIN apartment_info ai on ai.id = la.apartment_id and ai.is_deleted = 0
+                LEFT JOIN room_info ri on ri.id = la.room_id and ri.is_deleted = 0
+        WHERE la.phone = #{phone} AND la.is_deleted = 0
+    </select>
 
+    <resultMap id="AgreementDetailVo" type="com.asluax.lease.web.app.vo.agreement.AgreementDetailVo" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="apartmentGraphVoList" ofType="com.asluax.lease.web.app.vo.graph.GraphVo" autoMapping="true">
+            <result property="name" column="aname"/>
+            <result property="url" column="aurl"/>
+        </collection>
+        <collection property="roomGraphVoList" ofType="com.asluax.lease.web.app.vo.graph.GraphVo" autoMapping="true">
+            <result property="name" column="rname"/>
+            <result property="url" column="rurl"/>
+        </collection>
+    </resultMap>
+    <select id="getDetailById" resultMap="AgreementDetailVo">
+        SELECT
+            la.*,
+            ai.name apartment_name,
+            ri.room_number,
+            agi.name aname,
+            agi.url aurl,
+            rgi.name rname,
+            rgi.name rurl,
+            pt.name payment_type_name,
+            lt.month_count lease_term_month_count,
+            lt.unit lease_term_unit
+        FROM
+            lease_agreement la
+                LEFT JOIN graph_info agi ON agi.item_type = 1 AND agi.item_id = la.apartment_id AND agi.is_deleted = 0
+                LEFT JOIN graph_info rgi ON rgi.item_type = 2 AND rgi.item_id = la.room_id AND agi.is_deleted = 0
+                LEFT JOIN apartment_info ai ON ai.id = la.apartment_id AND ai.is_deleted = 0
+                LEFT JOIN room_info ri ON ri.id = la.room_id AND ri.is_deleted = 0
+                LEFT JOIN payment_type pt ON pt.id = la.payment_type_id AND pt.is_deleted = 0
+                LEFT JOIN lease_term lt ON lt.id = la.lease_term_id AND lt.is_deleted = 0
+        WHERE la.id = #{id} AND  la.is_deleted = 0
+    </select>
 </mapper>

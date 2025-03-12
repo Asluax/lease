@@ -1,6 +1,7 @@
 package com.asluax.lease.web.app.mapper;
 
 import com.asluax.lease.model.entity.ApartmentInfo;
+import com.asluax.lease.web.app.vo.apartment.ApartmentDetailVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface ApartmentInfoMapper extends BaseMapper<ApartmentInfo> {
 
 
+    ApartmentDetailVo getDetailById(Long id);
 }
 
 

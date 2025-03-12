@@ -3,6 +3,7 @@ package com.asluax.lease.web.app.vo.agreement;
 import com.asluax.lease.model.enums.LeaseSourceType;
 import com.asluax.lease.model.enums.LeaseStatus;
 import com.asluax.lease.web.app.vo.graph.GraphVo;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class AgreementItemVo {
     private Long id;
 
     @Schema(description = "房间图片列表")
+    @TableField(exist = false)
     private List<GraphVo> roomGraphVoList;
 
     @Schema(description = "公寓名称")

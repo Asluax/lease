@@ -1,7 +1,11 @@
 package com.asluax.lease.web.app.mapper;
 
 import com.asluax.lease.model.entity.LeaseAgreement;
+import com.asluax.lease.web.app.vo.agreement.AgreementDetailVo;
+import com.asluax.lease.web.app.vo.agreement.AgreementItemVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -12,6 +16,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface LeaseAgreementMapper extends BaseMapper<LeaseAgreement> {
 
 
+    List<AgreementItemVo> listItem(String phone);
+
+    AgreementDetailVo getDetailById(Long id);
 }
 
 

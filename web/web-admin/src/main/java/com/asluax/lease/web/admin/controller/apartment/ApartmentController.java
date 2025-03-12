@@ -56,7 +56,7 @@ public class ApartmentController {
     public Result<ApartmentDetailVo> getDetailById(@RequestParam Long id) {
         return Result.ok(apartmentInfoService.getDetailById(id));
     }
-    // todo 未完成
+
     @Operation(summary = "根据id删除公寓信息")
     @DeleteMapping("removeById")
     public Result removeById(@RequestParam Long id) {

@@ -78,6 +78,6 @@ public class LoginServiceImpl implements LoginService {
         if (user.getStatus().equals(BaseStatus.DISABLE)) {
             throw new MyException(ResultCodeEnum.APP_ACCOUNT_DISABLED_ERROR);
         }
-        return JwtUtil.createToken(user.getId(), user.getName());
+        return JwtUtil.createTokenAdmin(user.getId(), user.getName());
     }
 }

@@ -1,7 +1,11 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.LeaseAgreement;
+import com.asluax.lease.web.app.vo.agreement.AgreementDetailVo;
+import com.asluax.lease.web.app.vo.agreement.AgreementItemVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -10,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface LeaseAgreementService extends IService<LeaseAgreement> {
 
+    List<AgreementItemVo> listItem(String phone);
+
+    AgreementDetailVo getDetailById(Long id);
 }

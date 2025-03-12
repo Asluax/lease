@@ -3,6 +3,7 @@ package com.asluax.lease.web.app.service.impl;
 import com.asluax.lease.model.entity.ApartmentInfo;
 import com.asluax.lease.web.app.mapper.*;
 import com.asluax.lease.web.app.service.ApartmentInfoService;
+import com.asluax.lease.web.app.vo.apartment.ApartmentDetailVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         implements ApartmentInfoService {
 
 
+    @Override
+    public ApartmentDetailVo getDetailById(Long id) {
+        return baseMapper.getDetailById(id);
+    }
 }
 
 

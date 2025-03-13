@@ -1,7 +1,10 @@
 package com.asluax.lease.web.app.mapper;
 
 import com.asluax.lease.model.entity.ViewAppointment;
+import com.asluax.lease.web.app.vo.appointment.AppointmentItemVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -12,6 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface ViewAppointmentMapper extends BaseMapper<ViewAppointment> {
 
 
+    List<AppointmentItemVo> listItem(Long userId);
 }
 
 

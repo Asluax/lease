@@ -1,8 +1,11 @@
 package com.asluax.lease.web.app.service.impl;
 
-import com.asluax.lease.model.entity.*;
-import com.asluax.lease.web.app.mapper.*;
+import com.asluax.lease.model.entity.RoomInfo;
+import com.asluax.lease.web.app.mapper.RoomInfoMapper;
 import com.asluax.lease.web.app.service.RoomInfoService;
+import com.asluax.lease.web.app.vo.room.RoomItemVo;
+import com.asluax.lease.web.app.vo.room.RoomQueryVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,10 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
         implements RoomInfoService {
 
 
+    @Override
+    public IPage<RoomItemVo> pageItem(IPage<RoomItemVo> page, RoomQueryVo queryVo) {
+        return baseMapper.pageItem(page,queryVo);
+    }
 }
 
 

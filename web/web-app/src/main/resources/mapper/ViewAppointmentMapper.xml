@@ -3,6 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.asluax.lease.web.app.mapper.ViewAppointmentMapper">
+    <resultMap id="AppointmentItemVo" type="com.asluax.lease.web.app.vo.appointment.AppointmentItemVo" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="graphVoList" ofType="com.asluax.lease.web.app.vo.graph.GraphVo" autoMapping="true">
+            <result property="name" column="gname"/>
+            <result property="url" column="gurl"/>
+        </collection>
+    </resultMap>
 
-
+    <select id="listItem" resultMap="AppointmentItemVo">
+        SELECT
+            va.id,
+            ai.name apartment_name,
+            gi.name gname,
+            gi.url gurl,
+            va.appointment_time,
+            va.appointment_status
+        FROM
+            view_appointment va
+                LEFT JOIN apartment_info ai ON ai.id = va.apartment_id
+                AND ai.is_deleted = 0
+                LEFT JOIN graph_info gi ON gi.item_type = 1
+                AND gi.item_id = va.apartment_id
+                AND gi.is_deleted = 0
+        WHERE
+            va.user_id = #{userId} AND va.is_deleted = 0
+    </select>
 </mapper>

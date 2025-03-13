@@ -1,7 +1,11 @@
 package com.asluax.lease.web.app.mapper;
 
 import com.asluax.lease.model.entity.RoomInfo;
+import com.asluax.lease.web.app.vo.room.RoomItemVo;
+import com.asluax.lease.web.app.vo.room.RoomQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author liubo
@@ -12,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface RoomInfoMapper extends BaseMapper<RoomInfo> {
 
 
+    IPage<RoomItemVo> pageItem(@Param("page") IPage<RoomItemVo> page, @Param("queryVo") RoomQueryVo queryVo);
 }

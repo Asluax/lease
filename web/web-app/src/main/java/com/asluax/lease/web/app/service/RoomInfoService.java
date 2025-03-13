@@ -1,6 +1,9 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.RoomInfo;
+import com.asluax.lease.web.app.vo.room.RoomItemVo;
+import com.asluax.lease.web.app.vo.room.RoomQueryVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RoomInfoService extends IService<RoomInfo> {
 
-
+    IPage<RoomItemVo> pageItem(IPage<RoomItemVo> page, RoomQueryVo queryVo);
 }

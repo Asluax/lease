@@ -3,8 +3,11 @@ package com.asluax.lease.web.app.service.impl;
 import com.asluax.lease.model.entity.ViewAppointment;
 import com.asluax.lease.web.app.mapper.ViewAppointmentMapper;
 import com.asluax.lease.web.app.service.ViewAppointmentService;
+import com.asluax.lease.web.app.vo.appointment.AppointmentItemVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -16,6 +19,11 @@ public class ViewAppointmentServiceImpl extends ServiceImpl<ViewAppointmentMappe
         implements ViewAppointmentService {
 
 
+
+    @Override
+    public List<AppointmentItemVo> lisItem(Long userId) {
+        return baseMapper.listItem(userId);
+    }
 }
 
 

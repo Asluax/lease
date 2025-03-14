@@ -5,4 +5,16 @@
 <mapper namespace="com.asluax.lease.web.app.mapper.FeeValueMapper">
 
 
+    <select id="getListByApartmentId" resultType="com.asluax.lease.web.app.vo.fee.FeeValueVo">
+        select v.*,
+               k.name fee_key_name
+        from fee_value v
+                 left join fee_key k on v.fee_key_id = k.id
+        where v.is_deleted = 0
+          and k.is_deleted = 0
+          and v.id in (select fee_value_id
+                       from apartment_fee_value afv
+                       where afv.is_deleted = 0
+                         and apartment_id = #{id})
+    </select>
 </mapper>

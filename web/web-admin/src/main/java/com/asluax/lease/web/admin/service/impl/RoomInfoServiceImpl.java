@@ -130,7 +130,7 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
     private void removeOther(Long id) {
         //* 删除图片列表
         graphInfoService.remove(new LambdaQueryWrapper<GraphInfo>()
-                .eq(GraphInfo::getItemId, ItemType.ROOM)
+                .eq(GraphInfo::getItemType, ItemType.ROOM)
                 .eq(GraphInfo::getItemId, id));
         //* 删除属性信息列表
         roomAttrValueService.remove(new LambdaQueryWrapper<RoomAttrValue>().eq(RoomAttrValue::getRoomId, id));

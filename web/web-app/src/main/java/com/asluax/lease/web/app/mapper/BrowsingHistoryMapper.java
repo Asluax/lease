@@ -1,7 +1,11 @@
 package com.asluax.lease.web.app.mapper;
 
 import com.asluax.lease.model.entity.BrowsingHistory;
+import com.asluax.lease.web.app.vo.history.HistoryItemVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author liubo
@@ -11,6 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface BrowsingHistoryMapper extends BaseMapper<BrowsingHistory> {
 
+    Page<HistoryItemVo> pageHistoryItemByUserId(@Param("page") IPage<HistoryItemVo> page, @Param("userId") Long userId);
 }
 
 

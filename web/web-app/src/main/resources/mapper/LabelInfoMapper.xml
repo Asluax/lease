@@ -5,4 +5,15 @@
 <mapper namespace="com.asluax.lease.web.app.mapper.LabelInfoMapper">
 
 
+    <select id="getListByRoomId" resultType="com.asluax.lease.model.entity.LabelInfo">
+        select
+            i.type,
+            i.id,
+            i.name
+        from label_info i
+        where i.id in (select l.label_id
+                       from room_label l
+                       where l.is_deleted = 0
+                         and l.room_id = #{id})
+    </select>
 </mapper>

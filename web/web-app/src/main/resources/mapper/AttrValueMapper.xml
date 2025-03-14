@@ -5,4 +5,16 @@
 <mapper namespace="com.asluax.lease.web.app.mapper.AttrValueMapper">
 
 
+    <select id="getListByRoomId" resultType="com.asluax.lease.web.app.vo.attr.AttrValueVo">
+        select v.*,
+               k.name attr_key_name
+        from attr_value v
+                 left join attr_key k on v.attr_key_id = k.id
+        where v.is_deleted = 0
+          and k.is_deleted = 0
+          and v.id in (select attr_value_id
+                       from room_attr_value av
+                       where av.is_deleted = 0
+                         and av.room_id = #{id})
+    </select>
 </mapper>

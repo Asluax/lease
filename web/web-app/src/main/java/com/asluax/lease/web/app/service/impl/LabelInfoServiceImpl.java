@@ -6,6 +6,8 @@ import com.asluax.lease.web.app.service.LabelInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author liubo
  * @description 针对表【label_info(标签信息表)】的数据库操作Service实现
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Service;
 public class LabelInfoServiceImpl extends ServiceImpl<LabelInfoMapper, LabelInfo>
         implements LabelInfoService {
 
+    @Override
+    public List<LabelInfo> getListByRoomId(Long id) {
+        return baseMapper.getListByRoomId(id);
+    }
 }
 
 

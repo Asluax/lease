@@ -1,7 +1,10 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.FeeValue;
+import com.asluax.lease.web.app.vo.fee.FeeValueVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface FeeValueService extends IService<FeeValue> {
 
+    List<FeeValueVo> getListByApartmentId(Long id);
 }

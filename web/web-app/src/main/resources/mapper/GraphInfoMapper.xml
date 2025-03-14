@@ -5,4 +5,13 @@
 <mapper namespace="com.asluax.lease.web.app.mapper.GraphInfoMapper">
 
 
+    <select id="getListByItemTypeAndId" resultType="com.asluax.lease.web.app.vo.graph.GraphVo">
+        select
+            name,
+            url
+        from graph_info
+        where item_type = #{itemType}
+        and item_id = #{id}
+        and is_deleted = 0
+    </select>
 </mapper>

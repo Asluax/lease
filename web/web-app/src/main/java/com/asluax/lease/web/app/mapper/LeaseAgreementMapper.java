@@ -19,6 +19,7 @@ public interface LeaseAgreementMapper extends BaseMapper<LeaseAgreement> {
     List<AgreementItemVo> listItem(String phone);
 
     AgreementDetailVo getDetailById(Long id);
+
 }
 
 

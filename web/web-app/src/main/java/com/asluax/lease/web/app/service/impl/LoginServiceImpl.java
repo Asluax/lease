@@ -55,6 +55,14 @@ public class LoginServiceImpl implements LoginService {
             throw new MyException(ResultCodeEnum.APP_LOGIN_CODE_ERROR);
         }
         UserInfo userInfo = userInfoService.lambdaQuery().eq(UserInfo::getPhone, phone).one();
+        if (userInfo == null) {
+            userInfo = new UserInfo();
+            userInfo.setPhone(loginVo.getPhone());
+            userInfo.setStatus(BaseStatus.ENABLE);
+            userInfo.setNickname("用户-"+loginVo.getPhone().substring(5));
+            userInfoService.save(userInfo);
+        }
+
         if (userInfo.getStatus().equals(BaseStatus.DISABLE)) {
             throw new MyException(ResultCodeEnum.APP_ACCOUNT_DISABLED_ERROR);
         }

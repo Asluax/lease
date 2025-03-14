@@ -3,8 +3,11 @@ package com.asluax.lease.web.app.service.impl;
 import com.asluax.lease.model.entity.AttrValue;
 import com.asluax.lease.web.app.mapper.AttrValueMapper;
 import com.asluax.lease.web.app.service.AttrValueService;
+import com.asluax.lease.web.app.vo.attr.AttrValueVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -15,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class AttrValueServiceImpl extends ServiceImpl<AttrValueMapper, AttrValue>
         implements AttrValueService {
 
+    @Override
+    public List<AttrValueVo> getListByRoomId(Long id) {
+        return baseMapper.getListByRoomId(id);
+    }
 }
 
 

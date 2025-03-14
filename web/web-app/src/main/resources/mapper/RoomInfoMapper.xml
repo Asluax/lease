@@ -7,36 +7,25 @@
         <id property="id" column="rid"/>
         <association property="apartmentInfo" javaType="com.asluax.lease.model.entity.ApartmentInfo" autoMapping="true">
             <id property="id" column="aid"/>
-            <result property="isRelease" column="apart_is_release"/>
         </association>
         <collection property="graphVoList" ofType="com.asluax.lease.web.app.vo.graph.GraphVo" autoMapping="true"
-        select="listGraphVoByRoomId" column="id">
+        select="listGraphVoByRoomId" column="rid">
         </collection>
         <collection property="labelInfoList" ofType="com.asluax.lease.model.entity.LabelInfo" autoMapping="true"
-        select="listLabelByRoomId" column="id">
+        select="listLabelByRoomId" column="rid">
         </collection>
     </resultMap>
     <select id="pageItem" resultMap="RoomItemVo">
         SELECT
-            ri.id rid,
-            ri.room_number,
-            ri.rent,
-            gi.name gname,
-            gi.url gurl,
-            li.id lid,
-            li.name lname,
-            li.type ltype,
-            ai.*,
-            ai.id aid,
-            ai.is_release apart_is_release
-        FROM
-            room_info ri
-                LEFT JOIN graph_info gi ON gi.item_type = 2 AND gi.item_id = ri.id AND gi.is_deleted = 0
-                LEFT JOIN room_label rl ON rl.room_id = ri.id AND rl.is_deleted = 0
-                LEFT JOIN label_info li ON li.id = rl.label_id AND li.is_deleted = 0
-                LEFT JOIN apartment_info ai ON ai.id = ri.apartment_id AND ai.is_deleted = 0
+        ri.id rid,
+        ri.room_number,
+        ri.rent,
+        ai.*, -- 公寓信息
+        ai.id aid
+        FROM room_info ri
+        LEFT JOIN apartment_info ai ON ai.id = ri.apartment_id AND ai.is_deleted = 0
         <where>
-            ri.is_deleted = 0
+            ri.is_deleted = 0 and ri.is_release = 1
         <if test="queryVo.provinceId != null">
             and ai.province_id = #{queryVo.provinceId}
         </if>
@@ -71,7 +60,7 @@
             url
         from graph_info
         where is_deleted = 0
-          and item_id=#{id}
+          and item_id=#{id} and item_type = 2
     </select>
 
     <!-- 根据公寓ID查询标签列表 -->
@@ -84,5 +73,33 @@
                      from room_label
                      where is_deleted = 0
                        and room_id = #{id})
+    </select>
+    <select id="getDetailById" resultType="com.asluax.lease.web.app.vo.room.RoomDetailVo">
+        select id,
+               room_number,
+               rent,
+               apartment_id,
+               is_release,
+               is_deleted
+        from room_info
+        where id = #{id}
+    </select>
+
+
+    <select id="pageItemByApartmentId" resultMap="RoomItemVo">
+        SELECT
+        ri.id rid,
+        ri.room_number,
+        ri.rent,
+        ai.*, -- 公寓信息
+        ai.id aid
+        FROM room_info ri
+        LEFT JOIN apartment_info ai ON ai.id = ri.apartment_id AND ai.is_deleted = 0
+        <where>
+        ri.is_deleted = 0 and ri.is_release = 1
+        <if test="id!=null and id!= ''">
+            and ri.apartment_id = #{id}
+        </if>
+        </where>
     </select>
 </mapper>

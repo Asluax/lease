@@ -1,6 +1,7 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.ViewAppointment;
+import com.asluax.lease.web.app.vo.appointment.AppointmentDetailVo;
 import com.asluax.lease.web.app.vo.appointment.AppointmentItemVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -15,4 +16,6 @@ public interface ViewAppointmentService extends IService<ViewAppointment> {
 
 
     List<AppointmentItemVo> lisItem(Long userId);
+
+    AppointmentDetailVo getDetailById(Long id);
 }

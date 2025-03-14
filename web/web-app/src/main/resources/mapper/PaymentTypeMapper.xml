@@ -5,4 +5,12 @@
 <mapper namespace="com.asluax.lease.web.app.mapper.PaymentTypeMapper">
 
 
+    <select id="getListByRoomId" resultType="com.asluax.lease.model.entity.PaymentType">
+        select *
+        from payment_type
+        where id in (select payment_type_id
+                     from room_payment_type rpt
+                     where rpt.is_deleted = 0
+                       and room_id = #{id})
+    </select>
 </mapper>

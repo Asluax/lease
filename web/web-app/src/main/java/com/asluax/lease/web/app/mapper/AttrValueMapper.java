@@ -1,7 +1,10 @@
 package com.asluax.lease.web.app.mapper;
 
 import com.asluax.lease.model.entity.AttrValue;
+import com.asluax.lease.web.app.vo.attr.AttrValueVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AttrValueMapper extends BaseMapper<AttrValue> {
 
+    List<AttrValueVo> getListByRoomId(Long id);
 }
 
 

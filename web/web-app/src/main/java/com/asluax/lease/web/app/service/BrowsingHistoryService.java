@@ -1,6 +1,9 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.BrowsingHistory;
+import com.asluax.lease.web.app.vo.history.HistoryItemVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BrowsingHistoryService extends IService<BrowsingHistory> {
 
+    Page<HistoryItemVo> pageHistoryItemByUserId(IPage<HistoryItemVo> page, Long userId);
+
+    void saveHistory(Long userId, Long roomId);
 }

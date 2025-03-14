@@ -65,4 +65,7 @@
                 LEFT JOIN lease_term lt ON lt.id = la.lease_term_id AND lt.is_deleted = 0
         WHERE la.id = #{id} AND  la.is_deleted = 0
     </select>
+    <select id="getListByRoomId" resultType="com.asluax.lease.model.entity.LeaseTerm">
+
+    </select>
 </mapper>

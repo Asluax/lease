@@ -1,7 +1,11 @@
 package com.asluax.lease.web.app.service;
 
 import com.asluax.lease.model.entity.GraphInfo;
+import com.asluax.lease.model.enums.ItemType;
+import com.asluax.lease.web.app.vo.graph.GraphVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -10,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface GraphInfoService extends IService<GraphInfo> {
 
+    List<GraphVo> getListByItemTypeAndId(ItemType itemType, Long id);
 }

@@ -6,6 +6,8 @@ import com.asluax.lease.web.app.service.PaymentTypeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author liubo
  * @description 针对表【payment_type(支付方式表)】的数据库操作Service实现
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Service;
 public class PaymentTypeServiceImpl extends ServiceImpl<PaymentTypeMapper, PaymentType>
         implements PaymentTypeService {
 
+    @Override
+    public List<PaymentType> getListByRoomId(Long id) {
+        return baseMapper.getListByRoomId(id);
+    }
 }
 
 

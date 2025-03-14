@@ -3,8 +3,11 @@ package com.asluax.lease.web.app.service.impl;
 import com.asluax.lease.model.entity.FeeValue;
 import com.asluax.lease.web.app.mapper.FeeValueMapper;
 import com.asluax.lease.web.app.service.FeeValueService;
+import com.asluax.lease.web.app.vo.fee.FeeValueVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author liubo
@@ -15,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class FeeValueServiceImpl extends ServiceImpl<FeeValueMapper, FeeValue>
         implements FeeValueService {
 
+    @Override
+    public List<FeeValueVo> getListByApartmentId(Long id) {
+        return baseMapper.getListByApartmentId(id);
+    }
 }
 
 

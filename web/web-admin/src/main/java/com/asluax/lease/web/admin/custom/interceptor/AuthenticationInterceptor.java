@@ -11,12 +11,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.util.Enumeration;
+
 @Component
 public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("access_token");
         if (token == null) {
+            Enumeration<String> headerNames = request.getHeaderNames();
+            while (headerNames.hasMoreElements()) {
+                String headerName = headerNames.nextElement();
+                System.out.println(headerName + request.getHeader(headerName));
+            }
             throw new MyException(ResultCodeEnum.ADMIN_LOGIN_AUTH);
         } else {
             Claims claims = JwtUtil.parseToken(token);

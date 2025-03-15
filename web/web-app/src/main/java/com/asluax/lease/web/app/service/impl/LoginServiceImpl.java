@@ -17,10 +17,12 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -41,13 +43,14 @@ public class LoginServiceImpl implements LoginService {
         if (StringUtils.isEmpty(phone)) {
             throw new MyException(ResultCodeEnum.APP_LOGIN_PHONE_EMPTY);
         }
-        String luaScript = "local value = redis.call(\"get\",KEYS[1]) if KEYS[1] ~= nil then redis.call(\"del\",KEYS[1]) end return value ";//redis.call("del",KEYS[1])
-        // 脚本
-        DefaultRedisScript<String> redisScript = new DefaultRedisScript<>();
-        redisScript.setResultType(String.class);
-        redisScript.setScriptText(luaScript);
-        // 执行
-        String result = redisTemplate.execute(redisScript, Collections.singletonList(phone));
+//        String luaScript = "local value = redis.call(\"get\",KEYS[1]) if KEYS[1] ~= nil then redis.call(\"del\",KEYS[1]) end return value ";//redis.call("del",KEYS[1])
+//        // 脚本
+//        DefaultRedisScript<String> redisScript = new DefaultRedisScript<>();
+//        redisScript.setResultType(String.class);
+//        redisScript.setScriptText(luaScript);
+//        // 执行
+//        String result = redisTemplate.execute(redisScript, Collections.singletonList(phone));
+        String result = redisTemplate.opsForValue().get(loginVo.getPhone());
         if (StringUtils.isEmpty(result)) {
             throw new MyException(ResultCodeEnum.APP_LOGIN_CODE_EXPIRED);
         }

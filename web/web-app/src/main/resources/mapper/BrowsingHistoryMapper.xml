@@ -26,7 +26,7 @@
         from browsing_history bh
                  left join room_info ri on bh.room_id = ri.id
                  left join apartment_info ai on ri.apartment_id = ai.id
-        where bh.is_deleted = 0
+        where bh.is_deleted = 0 and bh.user_id = #{id}
         order by bh.browse_time desc
     </select>
 
